@@ -1,0 +1,42 @@
+<div class="container border">
+    <h1 class="header">Add New Student</h1>
+    <div class="form-control">
+        <div>
+            <form #form="ngForm" (ngSubmit)="addStudent()">
+                <div>
+                    <label for="sn">Student Number</label>
+                    <input type="text" id="sn" 
+                    placeholder="000000000" name="studentNumber" [(ngModel)]="addStudentReq.studentNumber">
+                </div>
+                <div>
+                    <label for="fn">First Name</label>
+                    <input type="text" id="fn" 
+                    placeholder="John" name="firstName" [(ngModel)]="addStudentReq.firstName">
+                </div>
+                <div>
+                    <label for="mi">Middle Initial</label>
+                    <input type="text" id="mi" 
+                    placeholder="S" name="middleInitial" [(ngModel)]="addStudentReq.middleInitial">
+                </div>
+                <div>
+                    <label for="ln">Last Name</label>
+                    <input type="text" id="ln" 
+                    placeholder="Doe" name="lastName" [(ngModel)]="addStudentReq.lastName">
+                </div>
+                <div>
+                    <label for="program">Program</label>
+                    <input type="text" id="program" 
+                    placeholder="WBL/Cadet/Coop" name="programId" [(ngModel)]="addStudentReq.programId">
+                </div>
+                <div>
+                    <label for="status">Status</label>
+                    <input type="text" id="status" 
+                    placeholder="Active/Inactive" name="status" [(ngModel)]="addStudentReq.status">
+                </div>
+
+                <button type="submit" class="btn btn-save">Save</button>
+                <button type="button" class="btn btn-warning" routerLink="..">Close</button>
+              </form>
+        </div>
+    </div>
+</div>

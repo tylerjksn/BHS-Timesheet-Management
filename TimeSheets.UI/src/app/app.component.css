@@ -1,0 +1,51 @@
+/* Basic styling */
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+}
+
+nav {
+  background: #222/* rgb(80, 67, 122)*/;
+  padding: 15px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu,
+.submenu {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  padding: 7.5px 10px 7.5px 0;
+}
+
+.logo-image{
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 15px 0 0px;
+  background-color: rgb(255, 255, 255);
+}
+
+.logo-image:hover {
+  cursor: pointer;
+}
+
+.item {
+  padding: 10px;
+}
+
+a:hover,
+.item a:hover::after {
+  color: #ccc;
+}
+

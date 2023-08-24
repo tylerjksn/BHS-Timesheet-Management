@@ -1,0 +1,65 @@
+
+<div class="container">
+    <h1 class="header">View Timesheet</h1>
+    <div class="form-control">
+        <mat-accordion>
+            <mat-expansion-panel [(expanded)]="panelOpenState">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Timesheet Info 
+                </mat-panel-title>
+                <mat-panel-description>
+                  Input changes to timesheet data.
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form class="form-control" #form="ngForm" (ngSubmit)="updateTimesheet()">
+                  <div>
+                      <label for="sheetName">Sheet ID - Read Only</label>
+                      <input type="text" readonly id="sheetName" 
+                      placeholder="0" name="sheetName" [(ngModel)]="timesheetDetails.sheetName">
+                    </div>
+                    <div>
+                        <label for="periodId">Period ID</label>
+                        <input type="text" id="periodId" 
+                        placeholder="Q#W#Y20##" name="periodId" [(ngModel)]="timesheetDetails.periodId">
+                    </div>
+                    <div>
+                        <label for="sn">SID#</label>
+                        <input type="text" id="sn" 
+                        placeholder="22#00####" name="studentNumber" [(ngModel)]="timesheetDetails.studentNumber">
+                    </div>
+                    <div>
+                        <label for="firstName">FName</label>
+                        <input type="text" id="firstName" 
+                        placeholder="John" name="firstName" [(ngModel)]="timesheetDetails.firstName">
+                    </div>
+                    <div>
+                        <label for="lastName">LName</label>
+                        <input type="text" id="lastName" 
+                        placeholder="Smith" name="lastName" [(ngModel)]="timesheetDetails.lastName">
+                    </div>
+                    <div>
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" 
+                        placeholder="Business" name="companyName" [(ngModel)]="timesheetDetails.companyName">
+                    </div>
+                    <div>
+                      <label for="mentorName">Mentor Name</label>
+                      <input type="text" id="mentorName" 
+                      placeholder="Business" name="mentorName" [(ngModel)]="timesheetDetails.mentorName">
+                  </div>
+                  <div>
+                      <label for="status">Status</label>
+                      <input type="text" id="status"
+                      placeholder="Active/Inactive" name="status" [(ngModel)]="timesheetDetails.status">
+                  </div>
+                  <button type="submit" class="btn btn-save">Save</button>
+                  <button type="button" class="btn btn-save" (click)="saveAndClose()">Save & Close</button>
+                  <button type="button" class="btn btn-warning" 
+                  (click)="deleteStudent(timesheetDetails.id)">Delete</button>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>        
+        <button type="button" class="btn btn-side" [routerLink]="['/timesheets']">Close</button>
+    </div>
+ </div>

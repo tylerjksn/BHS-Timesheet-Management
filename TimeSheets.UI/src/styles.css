@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+html {
+  background-color: rgb(245, 245, 245);
+}
+
+.mrgn-5 {
+  margin: 5px;
+}
+
+.container { 
+  background-color: rgb(255, 255, 255);
+  margin: 30px;
+  overflow: auto;
+  min-height: 300px;
+  padding: 30px;
+  justify-content: center;
+}
+
+.border {
+  border: 2px solid black;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.btn {
+  display: inline-block;
+  background: rgb(80, 67, 122);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: inherit;
+  text-align: center;
+}
+
+.btn:focus {
+  outline: none;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-side {
+    float: right;
+}
+
+.form-control {
+  margin: 20px 0;
+}
+
+.form-control label {
+  display: block;
+}
+
+.form-control input {
+  width: 100%;
+  height: 40px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 17px;
+}
+
+.form-control-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-control-check label {
+  flex: 1;
+}
+
+.form-control-check input {
+  flex: 2;
+  height: 20px;
+}
+
+.header {
+    margin: 30px auto;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.mat-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+  
+}
+
+.mat-row .mat-cell {
+border-bottom: 1px solid transparent;
+border-top: 1px solid transparent;
+cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+border-color: currentColor;
+}
+
+.mat-expansion-panel {
+  padding: 10px;
+  max-width: 0 auto;
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 5px;
+}
+
+::ng-deep .mat-expansion-panel-body{
+  padding: 8px;
+  margin: 25px 0 0 25px;
+}
+
+a.tooltip:hover {
+  background:#ffffff; 
+  text-decoration:underline;
+  } 
+  /*BG color is a must for IE6*/
+  
+a.tooltip span {
+  display:none; 
+  padding:2px 3px; 
+  margin-left:8px; 
+  width:130px;
+  }
+  
+a.tooltip:hover span{
+  display:inline; 
+  position:absolute; 
+  background:#ffffff; 
+  border:1px solid #cccccc; 
+  color:#6c6c6c;
+  }
+  

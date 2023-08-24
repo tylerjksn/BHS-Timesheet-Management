@@ -1,0 +1,140 @@
+
+<div class="container border">
+    <h1 class="header">View Student</h1>
+    <div class="form-control">
+        <mat-accordion>
+            <mat-expansion-panel [(expanded)]="panelOpenState">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Student Info 
+                </mat-panel-title>
+                <mat-panel-description>
+                  Input changes to student data.
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form #form="ngForm" (ngSubmit)="updateStudent()">
+                  <div>
+                      <label for="sn">Student Number</label>
+                      <input type="text" class="form-control" id="sn" 
+                      placeholder="000000000" name="studentNumber" [(ngModel)]="studentDetails.studentNumber">
+                  </div>
+                  <div class="mb-3">
+                      <label for="fname">First Name</label>
+                      <input type="text" class="form-control" id="fname" 
+                      placeholder="John" name="firstName" [(ngModel)]="studentDetails.firstName">
+                  </div>
+                  <div class="mb-3">
+                      <label for="mi">Middle Initial</label>
+                      <input type="text" class="form-control" id="mi" 
+                      placeholder="S" name="middleInitial" [(ngModel)]="studentDetails.middleInitial">
+                  </div>
+                  <div class="mb-3">
+                      <label for="lname">Last Name</label>
+                      <input type="text" class="form-control" id="lname" 
+                      placeholder="Doe" name="lastName" [(ngModel)]="studentDetails.lastName">
+                  </div>
+                  <div class="mb-3">
+                      <label for="program">Program</label>
+                      <input type="text" class="form-control" id="program" 
+                      placeholder="WBL/Cadet/Coop/Etc." name="program" [(ngModel)]="studentDetails.programId">
+                  </div>
+                  <div class="mb-3">
+                      <label for="status">Status</label>
+                      <input type="text" class="form-control" id="status"
+                      placeholder="Active/Inactive" name="status" [(ngModel)]="studentDetails.status">
+                  </div>
+                  <button type="submit" class="btn btn-save">Save</button>
+                  <button type="button" class="btn btn-save" (click)="saveAndClose()">Save & Close</button>
+                  <button type="button" class="btn btn-warning" 
+                  (click)="deleteStudent(studentDetails.id)">Delete</button>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Completed Timesheets
+              </mat-panel-title>
+              <mat-panel-description>
+                View student's timesheets.
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="example-header">
+              <!--  <mat-form-field>
+                 <mat-label>Select Type</mat-label>
+                 <mat-select [(ngModel)]="displayType" (ngModelChange)="onChange(displayType)">
+                   <mat-option *ngFor="let type of selectType" [value]="type.value">
+                     {{type.text}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+               <mat-form-field *ngIf="timesheets.length > 0">
+                 <input matInput (keyup)="applyFilter($any($event).target.value)" placeholder="Filter">
+               </mat-form-field>
+
+             </div>
+             <p *ngIf="!timesheets || timesheets.length <= 0">No Timesheets Found</p>
+             <div *ngIf="timesheets.length > 0" class="mat-container">
+               
+               <mat-table [dataSource]="dataSource" matSort>
+                 
+                 <ng-container matColumnDef="select">
+                   <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                   <mat-cell *matCellDef="let row">
+                     <mat-checkbox (click)="$event.stopPropagation()" (change)="selectHandler(row)"
+                       [checked]="selection.isSelected(row)">
+                     </mat-checkbox>
+                   </mat-cell>
+                 </ng-container>
+       
+                 <ng-container matColumnDef="sheetId">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> Sheet ID </mat-header-cell>
+                   <mat-cell *matCellDef="let row" > {{row.sheetId}} </mat-cell>
+                 </ng-container>
+             
+                 <ng-container matColumnDef="periodId">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> Period ID </mat-header-cell>
+                   <mat-cell *matCellDef="let row"> {{row.periodId}} </mat-cell>
+                 </ng-container>
+             
+                 <ng-container matColumnDef="studentNumber">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> SID# </mat-header-cell>
+                   <mat-cell *matCellDef="let row"> {{row.studentNumber}} </mat-cell>
+                 </ng-container>
+                 
+                 <ng-container matColumnDef="firstName">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> FName </mat-header-cell>
+                   <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+                 </ng-container>
+
+                 <ng-container matColumnDef="lastName">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> LName </mat-header-cell>
+                   <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+                 </ng-container>
+       
+                 <ng-container matColumnDef="companyName">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+                   <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
+                 </ng-container>
+       
+                 <ng-container matColumnDef="mentorName">
+                   <mat-header-cell *matHeaderCellDef mat-sort-header> Mentor </mat-header-cell>
+                   <mat-cell *matCellDef="let row"> {{row.mentorName}} </mat-cell>
+                 </ng-container>
+                 
+                 <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+                 <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/dashboard', 'edit', row.id]">
+                 </mat-row>
+               </mat-table>
+       
+               <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+             </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        
+        <button type="button" class="btn btn-side" [routerLink]="['/dashboard']">Close</button>
+    </div>
+ </div>

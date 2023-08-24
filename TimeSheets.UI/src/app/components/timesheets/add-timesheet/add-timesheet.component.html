@@ -1,0 +1,35 @@
+<div class="container border">         
+    <h1 class="header">Brownsburg High School</h1>   
+    <div class="container">
+            <form class="form-control" [formGroup]="addTimesheetReq" (ngSubmit)="addTimesheet()">
+                <div>
+                      <label for="sn">SID#</label>
+                      <input type="text" id="sn" 
+                      placeholder="22#00####" name="studentNumber" formControlName="studentNumber">
+                  </div>
+                  <div>
+                      <label for="firstName">FName</label>
+                      <input type="text" id="firstName" 
+                      placeholder="John" name="firstName" formControlName="firstName">
+                  </div>
+                  <div>
+                      <label for="lastName">LName</label>
+                      <input type="text" id="lastName" 
+                      placeholder="Smith" name="lastName" formControlName="lastName">
+                  </div>
+                  <div>
+                      <label for="companyName">Company Name</label>
+                      <input type="text" id="companyName" 
+                      placeholder="Business" name="companyName" formControlName="companyName">
+                  </div>
+                  <div>
+                    <label for="mentorName">Mentor Name</label>
+                    <input type="text" id="mentorName" 
+                    placeholder="Business" name="mentorName" formControlName="mentorName">
+                </div>
+                <div>
+                    <button type="submit" class="btn">Create</button>
+                </div>
+            </form>
+    </div>
+</div>

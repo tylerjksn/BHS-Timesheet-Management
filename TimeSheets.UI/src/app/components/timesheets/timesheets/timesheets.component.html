@@ -1,0 +1,75 @@
+<div class="container border">
+    <h2 class="header">Timesheets</h2>
+    <div class="">
+       <!--  <mat-form-field>
+          <mat-label>Select Type</mat-label>
+              <mat-select [(ngModel)]="displayType" (ngModelChange)="onChange(displayType)">
+                <mat-option *ngFor="let type of selectType" [value]="type.value">
+                  {{type.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($any($event).target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <button type="button" class="btn btn-side" aria-current="page" routerLink="add"> + </button>
+      <div class="mat-container">
+      
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="selectHandler(row)"
+                [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          
+            <ng-container matColumnDef="sheetName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Sheet ID </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.sheetName}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="periodId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Period ID </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.periodId}} </mat-cell>
+              </ng-container>
+
+          <ng-container matColumnDef="studentNumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> SID# </mat-header-cell>
+            <mat-cell *matCellDef="let row" > {{row.studentNumber}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> FName </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> LName </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="companyName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+          </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/timesheets', 'edit', row.id]">
+          </mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
+      <div>
+        <button type="button" class="btn" [routerLink]="['/timesheets', 'template', ]">Create New Template</button>
+      </div>
+</div>

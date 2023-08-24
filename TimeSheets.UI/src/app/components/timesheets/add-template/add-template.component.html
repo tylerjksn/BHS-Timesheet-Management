@@ -1,0 +1,97 @@
+<div class="container border">
+    <h2 class="header">Templates</h2>
+
+    <div class="mat-container">
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>Timesheet Templates</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="selectHandler(row)"
+                [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sheetName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Sheet Identifier </mat-header-cell>
+            <mat-cell *matCellDef="let row" > {{row.sheetName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="countOfDays">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Days </mat-header-cell>
+            <mat-cell *matCellDef="let row" > {{row.countOfDays}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getAllocatedQuestions(row.id)">
+          </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+      </div>
+  <h3>Attached Questions:</h3>
+  <div *ngIf="((allocatedQuestions != null) && (allocatedQuestions.length > 0)); else noQuestions">
+    <div *ngFor="let q of allocatedQuestions; let i = index">
+      <ul>
+        <li>{{i+1}}: {{q.qFullText}}</li>
+      </ul>
+    </div>
+  </div>
+  <ng-template #noQuestions>Either no template is selected or the template has no questions.</ng-template>
+</div>
+
+  
+
+
+<div class="container border">
+    <h2 class="header">Template Builder</h2>
+
+    <h3>Select set of Questions:</h3>
+
+    <form [formGroup]="addTemplateReq" (ngSubmit)="addTemplate()">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Template Name</mat-label>
+            <input matInput name="sheetName" formControlName="sheetName"
+            placeholder="Something differentiable/easily recognizable.">
+        </mat-form-field>   
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Work Days</mat-label>
+            <input matInput name="countOfDays" formControlName="countOfDays"
+            placeholder="How many days should this sheet have to fill out? Default is 7 for a full week.">
+        </mat-form-field>   
+
+        <mat-form-field appearance="fill">
+            <mat-label>Questions</mat-label>
+            <mat-select [formControl]="chosenQuestions" multiple>
+              <mat-option *ngFor="let q of questionList" [value]="q" >{{q.qFullText}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button type="submit" class="btn">Create</button>
+    </form>
+</div>
+
+<div class="container border">
+    <h2 class="header">New Question</h2>
+
+    <h3>Enter text for a new selectable Question:</h3>
+
+    <form [formGroup]="addQuestionReq" (ngSubmit)="addQuestion()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Full Question</mat-label>
+            <textarea matInput name="qFullText" formControlName="qFullText"
+            placeholder="Are there any issues you have at your current workplace?"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Question Identifier</mat-label>
+            <input matInput name="questionName" formControlName="questionName"
+            placeholder="Something differentiable/easily recognizable. Ex: issues_to_attention or demonstrated_flexibility">
+        </mat-form-field>
+
+        <div>
+            <button type="submit" class="btn">Create</button>
+        </div>
+    </form>
+</div>
