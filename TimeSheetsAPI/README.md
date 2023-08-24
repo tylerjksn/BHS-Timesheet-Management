@@ -1,2 +1,4 @@
 # TimeSheets.API
-The first ever API I've made for the first ever "real project" I've worked on.
+Web API used to connect the Angular frontend to the SQL Server backend. 
+
+Built using .NET Entity Framework Core
